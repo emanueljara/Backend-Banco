@@ -1,0 +1,16 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "1038419153",
+    "database": "CRUD_USER1",
+    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "synchronize": true,
+    "migrationsTableName": "Registro_Migraciones",
+    "migrations": ["src/database/**/*.ts"],
+    "cli":{
+        "entitiesDir": "src/usuario/entities",
+        "migrationsDir": "src/database"
+    }
+}
