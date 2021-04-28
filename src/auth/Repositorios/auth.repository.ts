@@ -10,32 +10,32 @@ import { UsuarioService } from '../../usuario/services/usuario.service';
 
 @EntityRepository(Usuario)
 export class RepositorioAutentificacion extends Repository<Usuario> {
-    constructor(private readonly CrudUsuario: UsuarioService){
-        super();
-    }
+    //constructor(private readonly CrudUsuario: UsuarioService){
+    //    super();
+    //}
     async Registrarse(Registrar: RegistroDto){
-        //const {nombre, apellido, cedula, rol, email, password}=Registrar;
-        //const usuario= new Usuario();
-        //usuario.nombre=nombre;
-        //usuario.email=email;
-        //usuario.apellido=apellido;
-        //usuario.cedula=cedula;
-        //usuario.rol=rol;
+        const {nombre, apellido, cedula, rol, email, password}=Registrar;
+        const usuario= new Usuario();
+        usuario.nombre=nombre;
+        usuario.email=email;
+        usuario.apellido=apellido;
+        usuario.cedula=cedula;
+        usuario.rol=rol;
         //aqui puedo asignar el rol po defecto pero ya se esta haciendo automaticamente en 
         // los servicios del usuario
 
         //salt, lo que hace es generar 10 digitos aleatorios que se agregan a la contraseña
         //para dificultar la decodificacion del hash
-        //const salt=await genSalt(10);
-        //usuario.password=await hash(password,salt); //se le genera un hash a la contraseña
+        const salt=await genSalt(10);
+        usuario.password=await hash(password,salt); //se le genera un hash a la contraseña
 
-        //await usuario.save();//--->porque no deja el metodo save??
+        await usuario.save();//--->porque no deja el metodo save??
         //R/ se puso la entidad de usuario a heredar de BaseEntity que se encuentra en typeorm para que funcionara
 
-        const {password} = Registrar;
-        const salt = await genSalt(10);
-        const contrasena = await hash(password,salt);
-        this.CrudUsuario.CrearUsuario({...Registrar,password: contrasena});
+        //const {password} = Registrar;
+        //const salt = await genSalt(10);
+        //const contrasena = await hash(password,salt);
+        //this.CrudUsuario.CrearUsuario({...Registrar,password: contrasena});
     }
     async ValidarporEmailPassword (email:string, password?:string):Promise<{IfUserFind:boolean,UserFind:Usuario}>{
         const UserFind:Usuario = await this.findOne({

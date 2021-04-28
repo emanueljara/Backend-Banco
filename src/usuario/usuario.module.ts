@@ -4,12 +4,14 @@ import { UsuarioService } from './services/usuario.service';
 import { UsuarioController } from './controllers/usuario.controller';
 import { Usuario } from "./entities/usuario.entity";//trae la tabla de la base de datos creada
 import { AuthModule } from '../auth/auth.module';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([Usuario]),//le dice que este modulo va a utilizar la conexion "type orm" y se le aplica a la entidad "Usuario", si hay mas entidades se pondria: TypeOrmModule.forFeature([Usuario,enty2,enty3])-->indicar las entidades que utilizan dentro del modulo
     AuthModule
   ],
   providers: [UsuarioService],
-  controllers: [UsuarioController]
+  controllers: [UsuarioController],
+  exports: [UsuarioService]
 })
 export class UsuarioModule {}

@@ -3,6 +3,8 @@ import { UsuarioModule } from "./usuario/usuario.module";
 import { TypeOrmModule } from "@nestjs/typeorm";//esto es para abstraer el lenguaje sql de posgrest y simplemente manejarlo como un objeto, sintener que decir "select * from".etc si no usuario.find()-->lo convertimos en un objeto
 //import { AuthModule } from './modules/auth/auth.module';
 import { AuthModule } from './auth/auth.module';
+import { AgendamientosModule } from './agendamientos/agendamientos.module';
+
 
 @Module({
   imports: [
@@ -19,9 +21,10 @@ import { AuthModule } from './auth/auth.module';
     retryAttempts: 10//hace esta cantidad de intentos de conexion a la base de datos
   }),
     UsuarioModule,
-    AuthModule],
+    AuthModule,
+    AgendamientosModule],
   controllers: [],
-  providers: [],
+  providers: [ ],
 })
 export class AppModule {}
 //en "entities" se le dice que va a ir en la carpeta 'dist' y va a importar cualquier archivo 'entity' que termine en '.ts' o '.js'
